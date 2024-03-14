@@ -1,38 +1,181 @@
-.App {
-  text-align: center;
+/* Global Styles */
+html,
+body,
+.App,
+#root {
+  height: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Form Styles */
+.form-signin {
+  max-width: 330px;
+  padding: 1rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Card Title Styles */
+.card-title {
+  max-height: 50px;
+  overflow: hidden;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.card-title:hover {
+  overflow: auto;
+  white-space: normal;
+}
+
+.card {
+  color: inherit;
+  cursor: pointer;
+  width: 150px;
+  min-width: 150px;
+  height: 200px;
+  min-height: 200px;
+  perspective: 1000px;
+
+  position: relative;
+}
+
+.front,
+.back {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  border-radius: 6px;
+  background-position: center;
+  background-size: cover;
+  text-align: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition: ease-in-out 600ms;
+}
+.front {
+  background-size: cover;
+  padding: 2rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+  overflow: hidden;
+  font-family: Poppins, sans-serif;
+  color: rgba(255, 255, 255, 0.6);
+  text-shadow: black;
+  align-items: end;
+}
+.front:before {
+  position: absolute;
+  display: block;
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #1a9be6, #1a57e6);
+  opacity: 0.25;
+  z-index: -1;
+}
+.card:hover .front {
+  transform: rotateY(180deg);
+}
+.card:nth-child(even):hover .front {
+  transform: rotateY(-180deg);
+}
+.back {
+  background: rgba(1, 52, 75, 0.1);
+  transform: rotateY(-180deg);
+  padding: 0 2em;
+  color: #b4b7c1;
+  font-weight: bold;
+}
+.card:hover .back {
+  transform: rotateY(0deg);
+}
+.card:nth-child(even) .back {
+  transform: rotateY(180deg);
+}
+.card:nth-child(even):hover .back {
+  transform: rotateY(0deg);
 }
 
-.App-link {
-  color: #61dafb;
+/* Card Container Styles */
+.card-container,
+.card-container div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Review Comment Styles */
+.img-comment {
+  width: 50px;
+  height: 50px;
+  float: left;
+  margin-bottom: 15px;
+}
+
+.comment-content {
+  display: flex;
+  margin-left: 80px;
+  align-items: flex-start;
+}
+
+.comment-name,
+.comment-rating {
+  text-align: left;
+  font-size: 20px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+.review-rating {
+  display: inline-block;
+  max-width: 65px;
+}
+
+.comment-text {
+  font-size: 15px;
+  line-height: 10px;
+  display: block;
+  flex-grow: 1;
+  border: 1px solid #7a8192;
+  border-radius: 8px;
+  padding: 15px 20px 20px 20px;
+}
+
+.comment-time {
+  text-align: right;
+  font-size: 13px;
+  color: #b4b7c1;
+  flex-grow: 1;
+}
+
+/* Search List Styles */
+.search-list {
+  position: fixed;
+  z-index: 1000;
+  max-height: 300px;
+  overflow: auto;
+  font-weight: bold;
+}
+
+/* List Group Item Image Styles */
+.list-group-item-img {
+  background-size: cover;
+  width: 50px;
+  height: 75px;
+  float: left;
+  margin-right: 15px;
+  border-radius: 6px;
+  font-family: Poppins, sans-serif;
+  color: rgba(255, 255, 255, 0.6);
+  text-shadow: black;
+}
+
+/* Page Navigation Styles */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
