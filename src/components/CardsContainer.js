@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, Card, Button } from "react-bootstrap";
+import { Row, Col, Card, Button, Nav } from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
+import AxiosContext from "../context/AxiosContext";
 import { BsStarFill } from "react-icons/bs";
 import DeleteTitle from "../utils/DeleteTitle";
 

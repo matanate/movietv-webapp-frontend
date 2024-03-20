@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import GetTitle from "../utils/GetTitle";
-import AuthContext from "../context/AuthContext";
-import ReviewComment from "../components/ReviewComment";
-import AddReviewForm from "../components/AddReviewForm";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
 import Image from "react-bootstrap/Image";
 import { BsStarFill } from "react-icons/bs";
+import AuthContext from "../context/AuthContext";
+import AxiosContext from "../context/AxiosContext";
+import AddReviewForm from "../components/AddReviewForm";
+import ReviewComment from "../components/ReviewComment";
 
 const TitlePage = ({ category }) => {
   const { title_id } = useParams();

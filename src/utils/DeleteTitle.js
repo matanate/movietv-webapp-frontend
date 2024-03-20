@@ -1,4 +1,3 @@
-import axios from "axios";
 import { toast } from "react-toastify";
 
 const API_URL = "http://localhost:8000/api/";

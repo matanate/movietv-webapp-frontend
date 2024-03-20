@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import GetTitles from "../utils/GetTitles";
-import Container from "react-bootstrap/Container";
+import React from "react";
 import CardsContainer from "../components/CardsContainer";
+import Container from "react-bootstrap/Container";
 
 const HomePage = () => {
   const [topTitles, setTopTitles] = useState({

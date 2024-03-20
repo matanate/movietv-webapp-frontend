@@ -1,19 +1,19 @@
 import "./App.css";
+import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ToastContainer, Bounce } from "react-toastify";
+import AddTitlePage from "./pages/AddTitlePage";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import TitlesPage from "./pages/TitlesPage";
 import TitlePage from "./pages/TitlePage";
 import SelectTitlePage from "./pages/SelectTitlePage";
-import AddTitlePage from "./pages/AddTitlePage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ProtectRoute from "./utils/ProtectRoute";
 import ProtectRouteStaff from "./utils/ProtectRouteStaff";
-import { AuthProvider } from "./context/AuthContext";
-import { ToastContainer, Bounce } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import AppProvider from "./context/AppContext";
 
 function App() {
   return (

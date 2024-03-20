@@ -1,15 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
-import AuthContext from "../context/AuthContext";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import CreateTitle from "../utils/CreateTitle";
+import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import { toast } from "react-toastify";
-
-// Define the base URL for the authentication API
-const API_URL = "http://localhost:8000/api/";
+import AxiosContext from "../context/AxiosContext";
+import CreateTitle from "../utils/CreateTitle";
 
 const SelectTitlePage = () => {
   const [titles, setTitles] = useState([]);

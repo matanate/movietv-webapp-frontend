@@ -1,16 +1,16 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { BsPersonCircle } from "react-icons/bs";
+import {
+  Nav,
+  Navbar,
+  NavDropdown,
+  ButtonGroup,
+  Button,
+  Container,
+} from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 import SearchResult from "../components/SearchResult";
-
-import { BsPersonCircle } from "react-icons/bs";
-
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
 
 const Header = () => {
   let { user, logoutUser } = useContext(AuthContext);
