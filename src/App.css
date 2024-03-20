@@ -151,12 +151,18 @@ body,
 }
 
 /* Search List Styles */
-.search-list {
-  position: fixed;
-  z-index: 1000;
+.dropdown div[aria-labelledby="search-dropdown"] {
   max-height: 300px;
   overflow: auto;
   font-weight: bold;
+}
+.dropdown div[aria-labelledby="search-dropdown"] a {
+  height: 80px;
+  text-wrap: balance;
+}
+
+#search-dropdown.dropdown-toggle::after {
+  display: none;
 }
 
 /* List Group Item Image Styles */
