@@ -66,46 +66,45 @@ const AuthProvider = ({ children }) => {
     e.preventDefault();
     const toastId = toast.loading("Creating user...");
     try {
-      const response = await axios.post(`${API_URL}create-user/`, {
-        username: e.target.username.value,
-        email: e.target.email.value,
-        password: e.target.password.value,
+      const response = await axios.post(
+        `${baseUrl}/create-user/`,
+        {
+          username: e.target.username.value,
+          email: e.target.email.value,
+          password: e.target.password.value,
+        },
+        { headers: { "Content-Type": "application/json" } }
+      );
+
+      const data = response.data;
+      console.log("User created successfully:", data);
+      toast.update(toastId, {
+        render: `User "${e.target.username.value}" created successfully!`,
+        type: "success",
+        isLoading: false,
+        autoClose: 5000,
+        closeOnClick: true,
+        closeButton: true,
       });
 
-      if (response.status === 201) {
-        const data = response.data;
-        console.log("User created successfully:", data);
-        toast.update(toastId, {
-          render: `User "${e.target.username.value}" created successfully!`,
-          type: "success",
-          isLoading: false,
-          autoClose: 5000,
-          closeOnClick: true,
-          closeButton: true,
-        });
-
-        // Auto-login after registration
-        try {
-          await loginUser(e);
-        } catch (error) {
-          console.error("Auto login after registration failed:", error);
-          toast.warning("Auto login after registration failed.");
-          navigate("/login"); // Redirect to login page if auto-login fails after registration
-        }
-      } else {
-        const errorData = await response.json();
-        console.error("Failed to create user:", errorData);
-        toast.update(toastId, {
-          render: "Failed to create user. Please try again.",
-          type: "error",
-          isLoading: false,
-          autoClose: 5000,
-          closeOnClick: true,
-          closeButton: true,
-        });
+      // Auto-login after registration
+      try {
+        loginUser(e);
+      } catch (error) {
+        console.error("Auto login after registration failed:", error);
+        toast.warning("Auto login after registration failed.");
+        navigate("/login"); // Redirect to login page if auto-login fails after registration
       }
     } catch (error) {
-      console.error("An error occurred during the request:", error);
+      console.error("Failed to create user:", error);
+      toast.update(toastId, {
+        render: "Failed to create user. Please try again.",
+        type: "error",
+        isLoading: false,
+        autoClose: 5000,
+        closeOnClick: true,
+        closeButton: true,
+      });
     }
   };
 

@@ -54,7 +54,10 @@ function App() {
               path="tv-shows/:title_id"
               element={<TitlePage category={"tv"} />}
             />
-            <Route path="search/:searchTerm" element={<TitlesPage />} />
+            <Route
+              path="search/:searchTerm"
+              element={<TitlesPage category={"search"} />}
+            />
             <Route
               path="add-title"
               element={
