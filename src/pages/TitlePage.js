@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import GetTitle from "../utils/GetTitle";
+import Spinner from "react-bootstrap/Spinner";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -27,7 +28,7 @@ const TitlePage = ({ category }) => {
   const getRatingColor = () => {
     if (title.rating > 8) {
       return "success";
-    } else if (title.ratings <= 8 && title.ratings > 7) {
+    } else if (title.rating <= 8 && title.rating > 7) {
       return "warning";
     } else {
       return "danger";
@@ -46,8 +47,18 @@ const TitlePage = ({ category }) => {
     fetchTitle();
   }, [title_id, reviewSubmitted]);
 
+  if (!title) {
+    return (
+      <Container>
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </Container>
+    );
+  }
+
   // Check if title is falsy or movie_or_tv is not equal to category
-  if (!title || title.movie_or_tv !== category) {
+  if (title.length === 0 || title.movie_or_tv !== category) {
     return (
       <Container>
         <h1>Title not found</h1>

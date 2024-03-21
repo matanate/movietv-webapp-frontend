@@ -4,8 +4,9 @@ import AuthContext from "../context/AuthContext";
 
 const ProtectRouteStaff = ({ redirectPath = "/", children }) => {
   let { user } = useContext(AuthContext);
+
   if (!(user && user.is_staff)) {
-    return <Navigate to={redirectPath} replace />;
+    return <Navigate to={redirectPath} />;
   }
 
   return children;
