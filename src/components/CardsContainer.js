@@ -6,8 +6,6 @@ import AxiosContext from "../context/AxiosContext";
 import { BsStarFill } from "react-icons/bs";
 import DeleteTitle from "../utils/DeleteTitle";
 
-const CardsContainer = ({ titles }) => {
-  const { user, authTokens, onTitleDelete } = useContext(AuthContext);
   return (
     <Row className="card-container">
       {titles.map((title) => (

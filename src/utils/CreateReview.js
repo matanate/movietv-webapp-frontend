@@ -1,40 +1,24 @@
 import { toast } from "react-toastify";
 
-const API_URL = "http://localhost:8000/api/";
-
-const CreateReview = async (e, user, authTokens, onReviewSubmit) => {
+const CreateReview = async (e, user, api) => {
   e.preventDefault();
   const toastId = toast.loading("Creating review...");
   try {
-    let response = await axios.post(
-      `${API_URL}create-review/`,
-      {
-        title: e.target.titleId.value,
-        author: user.user_id,
-        rating: e.target.rating.value,
-        comment: e.target.comment.value,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${authTokens.access}`,
-        },
-      }
-    );
+    const response = await api.post("/create-review/", {
+      title: e.target.titleId.value,
+      author: user.user_id,
+      rating: e.target.rating.value,
+      comment: e.target.comment.value,
+    });
 
-    if (response.status === 201) {
-      let data = response.data;
-      toast.update(toastId, {
-        render: "Review created successfully!",
-        type: "success",
-        isLoading: false,
-        autoClose: 5000,
-        closeOnClick: true,
-        closeButton: true,
-      });
-      onReviewSubmit();
-      return data;
-    }
+    toast.update(toastId, {
+      render: "Review created successfully!",
+      type: "success",
+      isLoading: false,
+      autoClose: 5000,
+      closeOnClick: true,
+      closeButton: true,
+    });
   } catch (error) {
     console.error("An error occurred during review creation:", error);
     toast.update(toastId, {

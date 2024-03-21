@@ -9,32 +9,24 @@ import CreateTitle from "../utils/CreateTitle";
 
 const SelectTitlePage = () => {
   const [titles, setTitles] = useState([]);
-  const { authTokens } = useContext(AuthContext);
   const [searchParams] = useSearchParams();
   let navigate = useNavigate();
+  let { useAxios } = useContext(AxiosContext);
+  let api = useAxios();
 
   useEffect(() => {
     const fetchData = async () => {
       const toastId = toast.loading("Fetching titles...");
+      const movieOrTv = searchParams.get("movie-or-tv");
+      const searchTerm = searchParams.get("search-term");
+
       try {
-        const movieOrTv = searchParams.get("movie-or-tv");
-        const searchTerm = searchParams.get("search-term");
-
-        const response = await axios.get(
-          `${API_URL}get-tmdb-search/?movie-or-tv=${movieOrTv}&search-term=${searchTerm}`,
-          {
-            headers: {
-              Authorization: `Bearer ${authTokens.access}`,
-              "Content-Type": "application/json",
-            },
-          }
+        const response = await api.get(
+          `get-tmdb-search/?movie-or-tv=${movieOrTv}&search-term=${searchTerm}`
         );
-
-        if (response.status === 200) {
-          toast.dismiss(toastId);
-          const data = response.data;
-          setTitles(data);
-        }
+        toast.dismiss(toastId);
+        const data = response.data;
+        setTitles(data);
       } catch (error) {
         toast.update(toastId, {
           render: "Failed to fetch titles. Please try again.",
@@ -49,7 +41,7 @@ const SelectTitlePage = () => {
     };
 
     fetchData();
-  }, [searchParams, authTokens.access]);
+  }, [searchParams]);
 
   return (
     <Container>
@@ -60,19 +52,21 @@ const SelectTitlePage = () => {
             key={index}
             className="form-floating"
             onSubmit={(e) => {
-              CreateTitle(
-                e,
-                title,
-                searchParams.get("movie-or-tv"),
-                authTokens
-              );
-              navigate(
-                `/${
-                  searchParams.get("movie-or-tv") === "movie"
-                    ? "movies"
-                    : "tv-shows"
-                }/${title.id}`
-              );
+              CreateTitle(e, title, searchParams.get("movie-or-tv"), api)
+                .then(() => {
+                  // Navigate only on successful response
+                  navigate(
+                    `/${
+                      searchParams.get("movie-or-tv") === "movie"
+                        ? "movies"
+                        : "tv-shows"
+                    }/${title.id}`
+                  );
+                })
+                .catch((error) => {
+                  console.error("Error creating title:", error);
+                  // Handle any errors here, e.g., display an error message
+                });
             }}
           >
             <Form.Control

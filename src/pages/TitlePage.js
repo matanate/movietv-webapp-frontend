@@ -13,9 +13,11 @@ import ReviewComment from "../components/ReviewComment";
 
 const TitlePage = ({ category }) => {
   const { title_id } = useParams();
-  const [title, setTitle] = useState({});
+  const [title, setTitle] = useState(null);
   const [reviewSubmitted, setReviewSubmitted] = useState(false);
-  const { user, authTokens } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+  const { useAxios } = useContext(AxiosContext);
+  const api = useAxios();
 
   const handleReviewSubmit = () => {
     // Toggle the reviewSubmitted state to trigger a re-render
@@ -34,7 +36,7 @@ const TitlePage = ({ category }) => {
   useEffect(() => {
     const fetchTitle = async () => {
       try {
-        const titleData = await GetTitle({ title_id: title_id });
+        const titleData = await GetTitle({ title_id: title_id, api: api });
         setTitle(titleData);
       } catch (error) {
         console.error("Error fetching title:", error);
@@ -88,7 +90,6 @@ const TitlePage = ({ category }) => {
                   key={review.id}
                   review={review}
                   user={user}
-                  authTokens={authTokens}
                   onReviewDeleted={handleReviewSubmit}
                 />
               ))

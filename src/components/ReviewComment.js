@@ -5,12 +5,14 @@ import AxiosContext from "../context/AxiosContext";
 import DeleteReview from "../utils/DeleteReview";
 import UpdateReview from "../utils/UpdateReview";
 
-const ReviewComment = ({ review, user, authTokens, onReviewDeleted }) => {
+const ReviewComment = ({ review, user, onReviewDeleted }) => {
   const [checked, setChecked] = useState(false);
   const [comment, setComment] = useState(
     <p className="comment-text">{review.comment}</p>
   );
   const [rating, setRating] = useState(review.rating);
+  let { useAxios } = useContext(AxiosContext);
+  let api = useAxios();
 
   useEffect(() => {
     if (!checked) {
@@ -45,14 +47,9 @@ const ReviewComment = ({ review, user, authTokens, onReviewDeleted }) => {
       as={checked ? "form" : "div"}
       onSubmit={
         checked
-          ? (e) => {
-              UpdateReview(
-                e,
-                review.id,
-                authTokens,
-                user.user_id,
-                onReviewDeleted
-              );
+          ? async (e) => {
+              await UpdateReview(e, review.id, user.user_id, api);
+              onReviewDeleted();
               setChecked(false);
             }
           : null
@@ -81,9 +78,10 @@ const ReviewComment = ({ review, user, authTokens, onReviewDeleted }) => {
               variant="danger"
               size="sm"
               className="d-block"
-              onClick={() =>
-                DeleteReview(review.id, authTokens, onReviewDeleted)
-              }
+              onClick={async () => {
+                await DeleteReview(review.id, api);
+                onReviewDeleted();
+              }}
             >
               Delete
             </Button>

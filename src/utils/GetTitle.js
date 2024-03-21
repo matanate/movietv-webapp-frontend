@@ -1,28 +1,15 @@
 import { toast } from "react-toastify";
 
-const API_URL = "http://localhost:8000/api/";
-
-const GetTitle = async ({ title_id }) => {
-  const toastId = toast.loading("Fetching title...");
+const getTitle = async ({ title_id, api }) => {
   try {
-    let response = await axios.get(`${API_URL}get-titles/${title_id}`);
+    const response = await api.get(`/get-titles/${title_id}`);
 
-    if (response.status === 200) {
-      let data = response.data;
-      toast.dismiss(toastId);
-      return data;
-    }
+    return response.data;
   } catch (error) {
     console.error("An error occurred during title fetching:", error);
-    toast.update(toastId, {
-      render: "Failed to fetch title.",
-      type: "warning",
-      isLoading: false,
-      autoClose: 5000,
-      closeOnClick: true,
-      closeButton: true,
-    });
+    toast.warning("Failed to fetch title.");
+    return [];
   }
 };
 
-export default GetTitle;
+export default getTitle;

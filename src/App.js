@@ -19,7 +19,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <AuthProvider>
+        <AppProvider>
           <Header />
           <ToastContainer
             position="top-center"
@@ -69,7 +69,7 @@ function App() {
             />
           </Routes>
           <Footer />
-        </AuthProvider>
+        </AppProvider>
       </Router>
     </div>
   );

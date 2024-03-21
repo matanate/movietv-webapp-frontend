@@ -4,8 +4,6 @@ import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-const API_URL = "http://localhost:8000/api/";
-
 const AuthContext = createContext();
 
 // Function to get stored tokens from localStorage
@@ -18,18 +16,23 @@ const AuthProvider = ({ children }) => {
   const [authTokens, setAuthTokens] = useState(getStoredTokens());
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-
   const navigate = useNavigate();
+  const baseUrl = "http://localhost:8000/api";
 
   // Function to handle user login
   const loginUser = async (e) => {
     e.preventDefault();
     const toastId = toast.loading("Logging in...");
     try {
-      const response = await axios.post(`${API_URL}token/`, {
-        email: e.target.email.value,
-        password: e.target.password.value,
-      });
+      const response = await axios.post(
+        `${baseUrl}/token/`,
+        {
+          email: e.target.email.value,
+          password: e.target.password.value,
+        },
+        { headers: { "Content-Type": "application/json" } }
+      );
+
       const { access, refresh } = response.data;
       setAuthTokens({ access, refresh });
       localStorage.setItem("authTokens", JSON.stringify({ access, refresh }));
@@ -114,59 +117,22 @@ const AuthProvider = ({ children }) => {
     toast.success("You are now logged out!");
   };
 
-  // Function to update the access token by refreshing it
-  const updateToken = async () => {
-    try {
-      const response = await axios.post(
-        `${API_URL}token/refresh/`,
-        { refresh: authTokens?.refresh },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const { access, refresh } = response.data;
-      setAuthTokens({ access, refresh });
-      localStorage.setItem("authTokens", JSON.stringify({ access, refresh }));
-      setUser(jwtDecode(access));
-    } catch (error) {
-      console.error("Failed to refresh token:", error);
-      logoutUser(); // Logout user if token refresh fails
-      toast.warning("Refresh token exceeded. Please log in again.");
-    } finally {
-      if (loading) {
-        setLoading(false);
-      }
-    }
-  };
-
   // Context data to be provided to consumers
   const contextData = {
-    user,
-    authTokens,
-    loginUser,
-    logoutUser,
-    createUser,
+    user: user,
+    authTokens: authTokens,
+    setUser: setUser,
+    setAuthTokens: setAuthTokens,
+    loginUser: loginUser,
+    logoutUser: logoutUser,
+    createUser: createUser,
   };
 
   useEffect(() => {
-    console.log(loading);
-    if (loading) {
-      console.log("Refreshing token (loading)");
-      updateToken(); // Automatically try to refresh token when loading
+    if (authTokens) {
+      setUser(jwtDecode(authTokens.access));
     }
-
-    // Set up an interval for periodic token refresh
-    let intervalTime = 1000 * 60 * 4; // 4 minutes
-    let interval = setInterval(() => {
-      if (authTokens) {
-        console.log("Refreshing token (interval)");
-        updateToken();
-      }
-    }, intervalTime);
-    // Clear the interval when the component unmounts
-    return () => clearInterval(interval);
+    setLoading(false);
   }, [authTokens, loading]);
 
   // Render the AuthProvider with context data and children

@@ -6,10 +6,17 @@ import AxiosContext from "../context/AxiosContext";
 import CreateReview from "../utils/CreateReview";
 
 const AddReviewForm = ({ titleId, onReviewSubmit }) => {
-  let { user, authTokens } = useContext(AuthContext);
+  let { user } = useContext(AuthContext);
+  let { useAxios } = useContext(AxiosContext);
+  let api = useAxios();
   return (
     <Container>
-      <Form onSubmit={(e) => CreateReview(e, user, authTokens, onReviewSubmit)}>
+      <Form
+        onSubmit={async (e) => {
+          await CreateReview(e, user, api);
+          onReviewSubmit();
+        }}
+      >
         <Form.Group className="mb-3">
           <Form.Label>Rating</Form.Label>
           <Form.Control

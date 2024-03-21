@@ -37,6 +37,7 @@ const SearchResult = () => {
           searchTerm: debouncedSearchTerm,
           titlesPerPage: 20,
           movieOrTv: "all",
+          api: api,
         });
         setTitles(data.titles);
       } catch (error) {
