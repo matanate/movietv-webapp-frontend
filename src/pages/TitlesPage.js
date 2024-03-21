@@ -27,7 +27,9 @@ const TitlesPage = ({ category }) => {
 
   return (
     <Container>
-      <h1>{pageTitleCategories[category]}:</h1>
+      <h1>
+        {pageTitleCategories[category]} for "{searchTerm}":
+      </h1>
 
       <CardsContainer
         category={category === "search" ? "all" : category}
