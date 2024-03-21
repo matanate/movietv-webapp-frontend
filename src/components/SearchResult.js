@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import Spinner from "react-bootstrap/Spinner";
 import Form from "react-bootstrap/Form";
 import AxiosContext from "../context/AxiosContext";
 import GetTitles from "../utils/GetTitles";
 
 const SearchResult = () => {
-  const [titles, setTitles] = useState([]);
+  const [titles, setTitles] = useState(null);
   const [searchTerm, setSearchTerm] = useState(null);
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState(null);
   const formRef = useRef(null);
@@ -63,7 +64,7 @@ const SearchResult = () => {
     if (debouncedSearchTerm && debouncedSearchTerm.length > 0) {
       fetchTitles();
     } else {
-      setTitles([]);
+      setTitles(null);
     }
   }, [debouncedSearchTerm]);
 
@@ -99,28 +100,36 @@ const SearchResult = () => {
       onBlur={onSearchBlur}
       show={isSearchFocus}
     >
-      {titles.map((title) => (
-        <NavDropdown.Item
-          key={`search-${title.id}`}
-          as={Link}
-          to={`${title.movie_or_tv === "movie" ? "movies" : "tv-shows"}/${
-            title.id
-          }`}
-          onClick={() => {
-            setSearchTerm(null);
-            formRef.current.reset();
-            setIsSearchFocus(false);
-          }}
-        >
-          <div
-            style={{ backgroundImage: `url('${title.img_url}')` }}
-            className="list-group-item-img"
+      {!titles ? (
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      ) : titles.length > 0 ? (
+        titles.map((title) => (
+          <NavDropdown.Item
+            key={`search-${title.id}`}
+            as={Link}
+            to={`${title.movie_or_tv === "movie" ? "movies" : "tv-shows"}/${
+              title.id
+            }`}
+            onClick={() => {
+              setSearchTerm(null);
+              formRef.current.reset();
+              setIsSearchFocus(false);
+            }}
           >
-            {title.movie_or_tv}
-          </div>
-          {title.title}
-        </NavDropdown.Item>
-      ))}
+            <div
+              style={{ backgroundImage: `url('${title.img_url}')` }}
+              className="list-group-item-img"
+            >
+              {title.movie_or_tv}
+            </div>
+            {title.title}
+          </NavDropdown.Item>
+        ))
+      ) : (
+        <p>No results found.</p>
+      )}
     </NavDropdown>
   );
 };
