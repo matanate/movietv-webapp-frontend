@@ -2,6 +2,7 @@ import { toast } from "react-toastify";
 
 const GetTitles = async ({
   orderBy = "rating",
+  isAscending = true,
   movieOrTv = "all",
   titlesPerPage = 10,
   pageNumber = 1,
@@ -11,6 +12,7 @@ const GetTitles = async ({
   try {
     const response = await api.post(`/get-titles/`, {
       order_by: orderBy,
+      is_ascending: isAscending,
       movie_or_tv: movieOrTv,
       title_per_page: titlesPerPage,
       page_number: pageNumber,

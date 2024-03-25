@@ -28,7 +28,8 @@ const TitlesPage = ({ category }) => {
   return (
     <Container>
       <h1>
-        {pageTitleCategories[category]} for "{searchTerm}":
+        {pageTitleCategories[category]}
+        {searchTerm ? ` for "${searchTerm}"` : ""}:
       </h1>
 
       <CardsContainer

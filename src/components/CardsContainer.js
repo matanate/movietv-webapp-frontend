@@ -14,6 +14,7 @@ import AxiosContext from "../context/AxiosContext";
 import { BsStarFill } from "react-icons/bs";
 import DeleteTitle from "../utils/DeleteTitle";
 import GetTitles from "../utils/GetTitles";
+import SortOptions from "../components/SortOptions";
 
 const CardsContainer = ({
   category,
@@ -31,6 +32,8 @@ const CardsContainer = ({
   const [pageNumber, setPageNumber] = useState(
     parseInt(searchParams.get("page")) || 1
   );
+  const [orderBy, setOrderBy] = useState("rating");
+  const [isAscending, setIsAscending] = useState(true);
 
   const handleTitleDelete = () => {
     // Toggle the reviewSubmitted state to trigger a re-render
@@ -38,10 +41,17 @@ const CardsContainer = ({
   };
 
   const adjustPageNumber = (amount) => {
-    setSearchParams({ page: pageNumber + amount });
+    setSearchParams(
+      pageNumber + amount === 1 ? "" : { page: pageNumber + amount }
+    );
     setPageNumber((prev) => {
       return prev + amount;
     });
+  };
+
+  const changePageNumber = (newPageNumber) => {
+    setSearchParams(newPageNumber === 1 ? "" : { page: newPageNumber });
+    setPageNumber(newPageNumber);
   };
 
   useEffect(() => {
@@ -51,13 +61,15 @@ const CardsContainer = ({
         titlesPerPage: titlesPerPage,
         pageNumber: pageNumber,
         searchTerm: searchTerm,
+        orderBy: orderBy,
+        isAscending: isAscending,
         api: api,
       });
       setTitles(fetchedTitles);
     };
 
     fetchTitles();
-  }, [titleDeleted, pageNumber, category, searchTerm]);
+  }, [titleDeleted, pageNumber, category, searchTerm, orderBy, isAscending]);
 
   if (!titles) {
     return (
@@ -81,6 +93,15 @@ const CardsContainer = ({
 
   return (
     <>
+      {!isHomePage && (
+        <SortOptions
+          orderBy={orderBy}
+          setOrderBy={setOrderBy}
+          isAscending={isAscending}
+          setIsAscending={setIsAscending}
+          changePageNumber={changePageNumber}
+        />
+      )}
       <Row className="card-container">
         {titles.titles?.map((title) => (
           <Col key={title.id} className="my-4">
