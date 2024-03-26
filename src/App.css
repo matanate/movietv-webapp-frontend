@@ -185,3 +185,9 @@ body,
   align-items: center;
   margin-top: 20px;
 }
+
+div[aria-labelledby="genre-dropdown"],
+div[aria-labelledby="rating-dropdown"] {
+  max-height: 200px;
+  overflow-y: auto;
+}

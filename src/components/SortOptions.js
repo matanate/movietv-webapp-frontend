@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BsChevronDoubleUp, BsChevronDoubleDown } from "react-icons/bs";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
 import ToggleButton from "react-bootstrap/ToggleButton";
 
 const SortOptions = ({
@@ -16,11 +17,10 @@ const SortOptions = ({
     { name: "Release Date", value: "release_date" },
     { name: "Title Name", value: "title" },
   ];
-  const [checked, setChecked] = useState(false);
   return (
-    <>
+    <Container className="d-flex">
       <span>Sort By: </span>
-      <ButtonGroup size="sm">
+      <ButtonGroup size="sm" className="mx-3">
         {radios.map((radio, idx) => (
           <ToggleButton
             key={idx}
@@ -32,7 +32,6 @@ const SortOptions = ({
             checked={orderBy === radio.value}
             onChange={(e) => {
               setOrderBy(e.currentTarget.value);
-              setChecked(e.currentTarget.checked);
               changePageNumber(1);
             }}
           >
@@ -49,7 +48,7 @@ const SortOptions = ({
           {isAscending ? <BsChevronDoubleDown /> : <BsChevronDoubleUp />}
         </Button>
       </ButtonGroup>
-    </>
+    </Container>
   );
 };
 

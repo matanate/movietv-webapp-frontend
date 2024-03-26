@@ -1,20 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import {
-  Row,
-  Col,
-  Container,
-  Card,
-  Button,
-  Nav,
-  Spinner,
-} from "react-bootstrap";
+import { BsStarFill } from "react-icons/bs";
+import { Row, Col, Card, Button, Nav, Spinner } from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 import AxiosContext from "../context/AxiosContext";
-import { BsStarFill } from "react-icons/bs";
+import SortOptions from "../components/SortOptions";
+import FilterOptions from "../components/FilterOptions";
 import DeleteTitle from "../utils/DeleteTitle";
 import GetTitles from "../utils/GetTitles";
-import SortOptions from "../components/SortOptions";
 
 const CardsContainer = ({
   category,
@@ -34,7 +27,40 @@ const CardsContainer = ({
   );
   const [orderBy, setOrderBy] = useState("rating");
   const [isAscending, setIsAscending] = useState(true);
+  const [checkedCategory, setCheckedCategory] = useState(
+    category === "search" ? "all" : category
+  );
+  const [genres, setGenres] = useState(new Set());
+  const [ratings, setRatings] = useState(new Set());
+  const [years, setYears] = useState(new Set());
 
+  // Update Set helper function
+  const updateSet = (item, operation) => {
+    return (prevItems) => {
+      const newItems = new Set(prevItems);
+      if (operation === "add") {
+        newItems.add(item);
+      } else if (operation === "remove") {
+        newItems.delete(item);
+      }
+      return newItems;
+    };
+  };
+
+  // Functions to update filters
+  const updateGenres = (genre, operation) => {
+    setGenres(updateSet(genre, operation));
+  };
+
+  const updateRatings = (rating, operation) => {
+    setRatings(updateSet(rating, operation));
+  };
+
+  const updateYears = (year, operation) => {
+    setYears(updateSet(year, operation));
+  };
+
+  // Function to handle title deletion
   const handleTitleDelete = () => {
     // Toggle the reviewSubmitted state to trigger a re-render
     setTitleDeleted((prev) => !prev);
@@ -49,59 +75,91 @@ const CardsContainer = ({
     });
   };
 
+  // Function to change page number
   const changePageNumber = (newPageNumber) => {
     setSearchParams(newPageNumber === 1 ? "" : { page: newPageNumber });
     setPageNumber(newPageNumber);
   };
 
+  // Fetch titles based on dependencies
   useEffect(() => {
+    setCheckedCategory(category === "search" ? "all" : category);
     const fetchTitles = async () => {
+      setLoading(true);
       const fetchedTitles = await GetTitles({
-        movieOrTv: category,
+        movieOrTv: checkedCategory,
         titlesPerPage: titlesPerPage,
         pageNumber: pageNumber,
         searchTerm: searchTerm,
         orderBy: orderBy,
         isAscending: isAscending,
+        genres: [...genres],
+        ratings: [...ratings],
+        years: [...years],
         api: api,
       });
       setTitles(fetchedTitles);
+      setLoading(false);
     };
+    if (
+      !(category === "search" && searchTerm === null) &&
+      (category === "search" ? "all" : category) === checkedCategory
+    ) {
+      fetchTitles();
+    }
+  }, [
+    titleDeleted,
+    pageNumber,
+    category,
+    orderBy,
+    isAscending,
+    searchTerm,
+    genres,
+    ratings,
+    years,
+    checkedCategory,
+  ]);
 
-    fetchTitles();
-  }, [titleDeleted, pageNumber, category, searchTerm, orderBy, isAscending]);
+  // Component for loading spinner
+  const LoadingSpinner = () => (
+    <Spinner animation="border" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </Spinner>
+  );
 
-  if (!titles) {
-    return (
-      <Spinner animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
-    );
-  }
-
-  if (titles.length === 0 || titles.titles.length === 0) {
-    return (
-      <Container>
-        {searchTerm ? (
-          <h4>No titles found.</h4>
-        ) : (
-          <h4>No Titles to display.</h4>
-        )}
-      </Container>
-    );
-  }
-
-  return (
+  // Component for sort and filter options
+  const SortAndFilterOptions = () => (
     <>
-      {!isHomePage && (
-        <SortOptions
-          orderBy={orderBy}
-          setOrderBy={setOrderBy}
-          isAscending={isAscending}
-          setIsAscending={setIsAscending}
-          changePageNumber={changePageNumber}
-        />
-      )}
+      <SortOptions
+        orderBy={orderBy}
+        setOrderBy={setOrderBy}
+        isAscending={isAscending}
+        setIsAscending={setIsAscending}
+        changePageNumber={changePageNumber}
+      />
+      <FilterOptions
+        category={category}
+        movieOrTv={checkedCategory}
+        setMovieOrTv={setCheckedCategory}
+        genres={genres}
+        updateGenres={updateGenres}
+        ratings={ratings}
+        updateRatings={updateRatings}
+        years={years}
+        updateYears={updateYears}
+        changePageNumber={changePageNumber}
+      />
+    </>
+  );
+
+  // Component for displaying no titles message
+  const NoTitlesMessage = () => (
+    <h4>{searchTerm ? "No titles found." : "No Titles to display."}</h4>
+  );
+
+  // Component for rendering titles
+  const RenderTitles = () => (
+    <>
       <Row className="card-container">
         {titles.titles?.map((title) => (
           <Col key={title.id} className="my-4">
@@ -179,6 +237,19 @@ const CardsContainer = ({
             </Nav.Link>
           </Nav.Item>
         </Nav>
+      )}
+    </>
+  );
+
+  return (
+    <>
+      {!isHomePage && <SortAndFilterOptions />}
+      {loading || !titles ? (
+        <LoadingSpinner />
+      ) : titles.length === 0 || titles.titles.length === 0 ? (
+        <NoTitlesMessage />
+      ) : (
+        <RenderTitles />
       )}
     </>
   );

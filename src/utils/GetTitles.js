@@ -7,6 +7,9 @@ const GetTitles = async ({
   titlesPerPage = 10,
   pageNumber = 1,
   searchTerm = null,
+  genres = null,
+  ratings = null,
+  years = null,
   api,
 }) => {
   try {
@@ -17,6 +20,9 @@ const GetTitles = async ({
       title_per_page: titlesPerPage,
       page_number: pageNumber,
       search_term: searchTerm,
+      genres: genres,
+      ratings: ratings,
+      years: years,
     });
 
     return response.data;
