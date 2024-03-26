@@ -33,7 +33,7 @@ const TitlesPage = ({ category }) => {
       </h1>
 
       <CardsContainer
-        category={category === "search" ? "all" : category}
+        category={category}
         searchTerm={searchTerm}
         titlesPerPage={20}
       />

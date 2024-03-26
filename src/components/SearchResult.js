@@ -7,6 +7,7 @@ import AxiosContext from "../context/AxiosContext";
 import GetTitles from "../utils/GetTitles";
 
 const SearchResult = () => {
+  const [loading, setLoading] = useState(true);
   const [titles, setTitles] = useState(null);
   const [searchTerm, setSearchTerm] = useState(null);
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState(null);
@@ -49,6 +50,7 @@ const SearchResult = () => {
 
   useEffect(() => {
     const fetchTitles = async () => {
+      setLoading(true);
       try {
         const data = await GetTitles({
           searchTerm: debouncedSearchTerm,
@@ -60,6 +62,7 @@ const SearchResult = () => {
       } catch (error) {
         console.error("Error fetching titles:", error);
       }
+      setLoading(false);
     };
     if (debouncedSearchTerm && debouncedSearchTerm.length > 0) {
       fetchTitles();
@@ -100,7 +103,7 @@ const SearchResult = () => {
       onBlur={onSearchBlur}
       show={isSearchFocus}
     >
-      {!titles ? (
+      {!titles || loading ? (
         <Spinner animation="border" role="status">
           <span className="visually-hidden">Loading...</span>
         </Spinner>

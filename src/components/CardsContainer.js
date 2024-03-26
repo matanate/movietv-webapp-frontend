@@ -15,10 +15,13 @@ const CardsContainer = ({
   searchTerm = null,
   titlesPerPage = 10,
 }) => {
+  // Contexts
   let { user } = useContext(AuthContext);
   let { useAxios } = useContext(AxiosContext);
   let api = useAxios();
 
+  // State variables
+  const [loading, setLoading] = useState(true);
   const [titles, setTitles] = useState(null);
   const [titleDeleted, setTitleDeleted] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -66,6 +69,7 @@ const CardsContainer = ({
     setTitleDeleted((prev) => !prev);
   };
 
+  // Function to adjust page number
   const adjustPageNumber = (amount) => {
     setSearchParams(
       pageNumber + amount === 1 ? "" : { page: pageNumber + amount }
@@ -230,7 +234,7 @@ const CardsContainer = ({
           </Nav.Item>
           <Nav.Item>
             <Nav.Link
-              disabled={pageNumber == titles.total_pages}
+              disabled={pageNumber === titles.total_pages}
               onClick={() => adjustPageNumber(1)}
             >
               Next

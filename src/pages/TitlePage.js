@@ -13,6 +13,7 @@ import AddReviewForm from "../components/AddReviewForm";
 import ReviewComment from "../components/ReviewComment";
 
 const TitlePage = ({ category }) => {
+  const [loading, setLoading] = useState(true);
   const { title_id } = useParams();
   const [title, setTitle] = useState(null);
   const [reviewSubmitted, setReviewSubmitted] = useState(false);
@@ -36,6 +37,7 @@ const TitlePage = ({ category }) => {
   };
   useEffect(() => {
     const fetchTitle = async () => {
+      setLoading(true);
       try {
         const titleData = await GetTitle({ title_id: title_id, api: api });
         setTitle(titleData);
@@ -45,9 +47,10 @@ const TitlePage = ({ category }) => {
     };
 
     fetchTitle();
+    setLoading(false);
   }, [title_id, reviewSubmitted]);
 
-  if (!title) {
+  if (!title || loading) {
     return (
       <Container>
         <Spinner animation="border" role="status">
