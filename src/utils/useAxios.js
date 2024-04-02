@@ -5,7 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
 import AuthContext from "../context/AuthContext";
 
-const baseUrl = "http://localhost:8000/api";
+const baseUrl = `${window.location.protocol}//${window.location.hostname}/backend`;
 
 // Mechanism to manage token refresh state and queue requests
 let isRefreshing = false;

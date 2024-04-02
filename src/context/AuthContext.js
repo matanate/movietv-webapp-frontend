@@ -17,7 +17,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const baseUrl = "http://localhost:8000/api";
+  const baseUrl = `${window.location.protocol}//${window.location.hostname}/backend`;
 
   // Function to handle user login
   const loginUser = async (e) => {

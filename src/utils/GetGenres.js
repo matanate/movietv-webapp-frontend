@@ -4,7 +4,7 @@ const GetGenres = async ({ api }) => {
 
     return response.data;
   } catch (error) {
-    console.error("An error occurred during title fetching:", error);
+    console.error("An error occurred during genres fetching:", error);
     return [];
   }
 };
