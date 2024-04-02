@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import TitlesPage from "./pages/TitlesPage";
 import TitlePage from "./pages/TitlePage";
+import NotFoundPage from "./pages/NotFoundPage";
 import SelectTitlePage from "./pages/SelectTitlePage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -70,6 +71,7 @@ function App() {
                 <ProtectRouteStaff>{<SelectTitlePage />}</ProtectRouteStaff>
               }
             />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
           <Footer />
         </AppProvider>
