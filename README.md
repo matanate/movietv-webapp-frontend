@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+### MovieTV App Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#### Overview
 
-## Available Scripts
+This project is a React-based frontend for a MovieTV app, which allows users to view titles, add reviews, delete reviews, and perform other related actions. The frontend utilizes Axios for API calls and JWT authentication for user management. Additionally, admin users have additional privileges such as adding titles and deleting reviews.
 
-In the project directory, you can run:
+#### Installation and Setup
 
-### `npm start`
+1. Clone the repository:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+git clone <repository-url>
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2. Navigate to the project directory:
 
-### `npm test`
+```bash
+git cd <project-directory>
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. Install dependencies:
 
-### `npm run build`
+```bash
+npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. Start the development server:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Configuration
 
-### `npm run eject`
+- Set the API URL in the src/utils/useAxios.js and src/context/AuthContext.js file to point to your backend server.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+#### Usage
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Navigate to the homepage to explore available titles.
+- Sign up or log in to access additional features.
+- Add reviews to titles or delete your own reviews.
+- Admin users can add new titles and delete reviews from any user.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### Dependencies
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- React
+- Axios
+- Django Backend Running
 
-## Learn More
+#### Docker Production Setup
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Dockerfile and nginx.conf are available for production.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Contributing
 
-### Code Splitting
+Contributions are welcome! If you'd like to contribute to this project, please follow these steps:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/your-feature-name`).
+3. Make your changes.
+4. Commit your changes (`git commit -am 'Add some feature'`).
+5. Push to the branch (`git push origin feature/your-feature-name`).
+6. Create a new Pull Request.
 
-### Analyzing the Bundle Size
+#### License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the MIT License. See the LICENSE file for details.
