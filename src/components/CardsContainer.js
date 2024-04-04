@@ -93,6 +93,7 @@ const CardsContainer = ({
     setGenres(new Set());
     setRatings(new Set());
     setYears(new Set());
+    changePageNumber(1);
     setLoading(false);
     setCheckedCategory(category === "search" ? "all" : category);
   }, [category]);
