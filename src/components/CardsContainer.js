@@ -85,9 +85,20 @@ const CardsContainer = ({
     setPageNumber(newPageNumber);
   };
 
+  // handle category change, reset filters
+  useEffect(() => {
+    setLoading(true);
+    setOrderBy("rating");
+    setIsAscending(true);
+    setGenres(new Set());
+    setRatings(new Set());
+    setYears(new Set());
+    setLoading(false);
+    setCheckedCategory(category === "search" ? "all" : category);
+  }, [category]);
+
   // Fetch titles based on dependencies
   useEffect(() => {
-    setCheckedCategory(category === "search" ? "all" : category);
     const fetchTitles = async () => {
       setLoading(true);
       const fetchedTitles = await GetTitles({
@@ -105,16 +116,12 @@ const CardsContainer = ({
       setTitles(fetchedTitles);
       setLoading(false);
     };
-    if (
-      !(category === "search" && searchTerm === null) &&
-      (category === "search" ? "all" : category) === checkedCategory
-    ) {
-      fetchTitles();
-    }
+    //
+
+    !loading && fetchTitles();
   }, [
     titleDeleted,
     pageNumber,
-    category,
     orderBy,
     isAscending,
     searchTerm,
