@@ -3,7 +3,7 @@ import axios from "axios";
 import dayjs from "dayjs";
 import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
-import AuthContext from "./AuthContext";
+import AuthContext from "../context/AuthContext";
 
 const baseUrl = `${window.location.protocol}//${window.location.hostname}/backend`;
 
