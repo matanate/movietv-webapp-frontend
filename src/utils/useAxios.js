@@ -5,7 +5,14 @@ import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
 import AuthContext from "../context/AuthContext";
 
-const baseUrl = `${window.location.protocol}//${window.location.hostname}/backend`;
+console.log(window.location.hostname, window.location.port);
+const baseUrl =
+  (window.location.hostname === "localhost" ||
+    window.location.hostname.startsWith("192.168.") ||
+    window.location.hostname === "127.0.0.1") &&
+  window.location.port === "3000"
+    ? "http://localhost:8000"
+    : `${window.location.protocol}//${window.location.hostname}/backend`;
 
 // Mechanism to manage token refresh state and queue requests
 let isRefreshing = false;

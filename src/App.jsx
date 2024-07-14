@@ -14,7 +14,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ProtectRoute from "./utils/ProtectRoute";
 import ProtectRouteStaff from "./utils/ProtectRouteStaff";
-import AppProvider from "./context/AppContext";
+import { AppProvider } from "./context/AppContext";
 
 function App() {
   return (

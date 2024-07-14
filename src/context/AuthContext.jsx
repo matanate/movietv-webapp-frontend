@@ -17,7 +17,13 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const baseUrl = `${window.location.protocol}//${window.location.hostname}/backend`;
+  const baseUrl =
+    (window.location.hostname === "localhost" ||
+      window.location.hostname.startsWith("192.168.") ||
+      window.location.hostname === "127.0.0.1") &&
+    window.location.port === "3000"
+      ? "http://localhost:8000"
+      : `${window.location.protocol}//${window.location.hostname}/backend`;
 
   // Function to handle user login
   const loginUser = async (e) => {

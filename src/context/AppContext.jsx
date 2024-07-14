@@ -1,14 +1,19 @@
-// AppContext.js
-import React from "react";
+import React, { createContext } from "react";
 import { AuthProvider } from "./AuthContext";
 import { AxiosProvider } from "./AxiosContext";
 
+const AppContext = createContext();
+
 const AppProvider = ({ children }) => {
+  const contextData = {};
   return (
-    <AuthProvider>
-      <AxiosProvider>{children}</AxiosProvider>
-    </AuthProvider>
+    <AppContext.Provider value={contextData}>
+      <AuthProvider>
+        <AxiosProvider>{children}</AxiosProvider>
+      </AuthProvider>
+    </AppContext.Provider>
   );
 };
 
-export default AppProvider;
+export default AppContext;
+export { AppProvider };

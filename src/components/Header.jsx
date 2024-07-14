@@ -10,7 +10,7 @@ import {
   Container,
 } from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
-import SearchResult from "../components/SearchResult";
+import SearchResult from "./SearchResult";
 
 const Header = () => {
   let { user, logoutUser } = useContext(AuthContext);

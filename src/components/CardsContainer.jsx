@@ -4,8 +4,8 @@ import { BsStarFill } from "react-icons/bs";
 import { Row, Col, Card, Button, Nav, Spinner } from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 import AxiosContext from "../context/AxiosContext";
-import SortOptions from "../components/SortOptions";
-import FilterOptions from "../components/FilterOptions";
+import SortOptions from "./SortOptions";
+import FilterOptions from "./FilterOptions";
 import DeleteTitle from "../utils/DeleteTitle";
 import GetTitles from "../utils/GetTitles";
 
