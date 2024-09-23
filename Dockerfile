@@ -1,25 +1,34 @@
-FROM node:21-alpine as build
+# Stage 1: Build the Next.js app
+FROM node:21-alpine AS build
 
-WORKDIR /
+WORKDIR /app
 
+# Define the build argument
+ARG NEXT_PUBLIC_SITE_URL
+ARG NEXT_PUBLIC_GOOGLE_CLIENT_ID
+
+# Make it available as an environment variable
+ENV NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}
+ENV NEXT_PUBLIC_GOOGLE_CLIENT_ID=${NEXT_PUBLIC_GOOGLE_CLIENT_ID}
+
+# Copy package files and install dependencies
 COPY package*.json ./
 RUN npm install
-COPY . .
 
-# Build the React app
+# Copy the entire app and build it
+COPY . .
 RUN npm run build
 
-FROM nginx:alpine
+# Stage 2: Run the Next.js server
+FROM node:21-alpine
 
-# Remove the default config file provided by Nginx
-RUN rm /etc/nginx/conf.d/default.conf
+WORKDIR /app
 
-# Copy your custom Nginx configuration file
-COPY nginx.conf /etc/nginx/conf.d
+# Copy the built Next.js app from the build stage
+COPY --from=build /app /app
 
-COPY --from=build /build /usr/share/nginx/html/react-build
+# Expose the port that the Next.js server runs on
+EXPOSE 3000
 
-EXPOSE 80
-
-# Serve the built React app
-CMD ["nginx", "-g", "daemon off;"]
+# Start the Next.js server
+CMD ["npm", "start"]

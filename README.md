@@ -2,7 +2,7 @@
 
 #### Overview
 
-This project is a React-based frontend for a MovieTV app, which allows users to view titles, add reviews, delete reviews, and perform other related actions. The frontend utilizes Axios for API calls and JWT authentication for user management. Additionally, admin users have additional privileges such as adding titles and deleting reviews.
+This project is a **Next.js** frontend for a MovieTV app, utilizing **TypeScript** and **MUI Devias** as a baseline. The app provides functionality for users to view titles, add reviews, delete reviews, and more. Users can authenticate using **Google login**, manage their profiles, and verify their email addresses for sign-up and password resets. The frontend also supports **dark mode** and employs improved context management using `useReducer`. Environment variables have been introduced for easy configuration.
 
 #### Installation and Setup
 
@@ -15,7 +15,7 @@ git clone <repository-url>
 2. Navigate to the project directory:
 
 ```bash
-git cd <project-directory>
+cd <project-directory>
 ```
 
 3. Install dependencies:
@@ -24,32 +24,47 @@ git cd <project-directory>
 npm install
 ```
 
-4. Start the development server:
+4. Set up environment variables by creating a `.env` file in the root directory and adding the following values:
 
 ```bash
-npm start
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=<your-google-client-id>
+NEXT_PUBLIC_SITE_URL=<your-site-url>
 ```
 
-#### Configuration
+5. Start the development server:
 
-- Set the API URL in the src/utils/useAxios.js and src/context/AuthContext.js file to point to your backend server.
+```bash
+npm run dev
+```
 
 #### Usage
 
 - Navigate to the homepage to explore available titles.
-- Sign up or log in to access additional features.
+- Sign up or log in with Google to access additional features.
+- Manage your user profile and settings.
 - Add reviews to titles or delete your own reviews.
 - Admin users can add new titles and delete reviews from any user.
 
+#### Features
+
+- **Google Login**: Use your Google account for authentication.
+- **Email Verification**: For sign-up and password reset functionality.
+- **Profile Management**: Users can update their profiles.
+- **Dark Mode Support**: Toggle between light and dark modes.
+- **Context Management**: Enhanced state management using `useReducer`.
+
 #### Dependencies
 
-- React
-- Axios
-- Django Backend Running
+- **Next.js**
+- **TypeScript**
+- **Material-UI (MUI)**
+- **Axios**
+- **Google API Client**
+- **Django Backend Running**
 
 #### Docker Production Setup
 
-- Dockerfile and nginx.conf are available for production.
+- Dockerfile is available for production deployment.
 
 #### Contributing
 
