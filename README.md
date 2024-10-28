@@ -1,8 +1,16 @@
 ### MovieTV App Frontend
 
+#### Version: v2.1.0
+
 #### Overview
 
 This project is a **Next.js** frontend for a MovieTV app, utilizing **TypeScript** and **MUI Devias** as a baseline. The app provides functionality for users to view titles, add reviews, delete reviews, and more. Users can authenticate using **Google login**, manage their profiles, and verify their email addresses for sign-up and password resets. The frontend also supports **dark mode** and employs improved context management using `useReducer`. Environment variables have been introduced for easy configuration.
+
+#### New Features (v2.1.0)
+
+- **MUI v6 Update**: Upgraded to the latest Material-UI (MUI) version 6.
+- **Unit Tests Added**: Basic unit tests have been introduced, including labels connected to controls for testing purposes.
+- **Minor Bug Fixes**: Various small bug fixes to improve app stability.
 
 #### Installation and Setup
 
@@ -52,6 +60,14 @@ npm run dev
 - **Profile Management**: Users can update their profiles.
 - **Dark Mode Support**: Toggle between light and dark modes.
 - **Context Management**: Enhanced state management using `useReducer`.
+
+#### Testing
+
+- Run unit tests:
+
+```bash
+npm run test
+```
 
 #### Dependencies
 
