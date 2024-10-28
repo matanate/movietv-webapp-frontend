@@ -1,0 +1,8 @@
+{
+  "presets": [
+    "next/babel", // Use Next.js babel preset
+    "@babel/preset-typescript", // Allows Babel to understand TypeScript
+    "@babel/preset-react", // Transforms JSX
+    ["@babel/preset-env", { "targets": { "node": "current" } }] // Transpiles code to work in Node.js (Jest)
+  ]
+}

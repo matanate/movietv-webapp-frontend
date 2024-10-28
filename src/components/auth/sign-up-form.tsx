@@ -190,8 +190,8 @@ export function SignUpForm(): React.JSX.Element {
               name="username"
               render={({ field }) => (
                 <FormControl error={Boolean(errors.username)}>
-                  <InputLabel>Username</InputLabel>
-                  <OutlinedInput {...field} label="Username" />
+                  <InputLabel htmlFor="usernameInput">Username</InputLabel>
+                  <OutlinedInput id="usernameInput" {...field} label="Username" />
                   {errors.username ? <FormHelperText>{errors.username.message}</FormHelperText> : null}
                 </FormControl>
               )}
@@ -202,8 +202,8 @@ export function SignUpForm(): React.JSX.Element {
               name="firstName"
               render={({ field }) => (
                 <FormControl error={Boolean(errors.firstName)}>
-                  <InputLabel>First name</InputLabel>
-                  <OutlinedInput {...field} label="First name" />
+                  <InputLabel htmlFor="firstNameInput">First Name</InputLabel>
+                  <OutlinedInput {...field} id="firstNameInput" label="First Name" />
                   {errors.firstName ? <FormHelperText>{errors.firstName.message}</FormHelperText> : null}
                 </FormControl>
               )}
@@ -214,8 +214,8 @@ export function SignUpForm(): React.JSX.Element {
               name="lastName"
               render={({ field }) => (
                 <FormControl error={Boolean(errors.lastName)}>
-                  <InputLabel>Last name</InputLabel>
-                  <OutlinedInput {...field} label="Last name" />
+                  <InputLabel htmlFor="lastNameInput">Last Name</InputLabel>
+                  <OutlinedInput {...field} id="lastNameInput" label="Last Name" />
                   {errors.lastName ? <FormHelperText>{errors.lastName.message}</FormHelperText> : null}
                 </FormControl>
               )}
@@ -226,8 +226,8 @@ export function SignUpForm(): React.JSX.Element {
               name="email"
               render={({ field }) => (
                 <FormControl error={Boolean(errors.email)}>
-                  <InputLabel>Email address</InputLabel>
-                  <OutlinedInput {...field} label="Email address" type="email" />
+                  <InputLabel htmlFor="emailInput">Email Address</InputLabel>
+                  <OutlinedInput {...field} id="emailInput" label="Email Address" type="email" />
                   {errors.email ? <FormHelperText>{errors.email.message}</FormHelperText> : null}
                 </FormControl>
               )}
@@ -238,20 +238,20 @@ export function SignUpForm(): React.JSX.Element {
               name="password"
               render={({ field }) => (
                 <FormControl error={Boolean(errors.password)}>
-                  <InputLabel>Password</InputLabel>
-                  <OutlinedInput {...field} label="Password" type="password" />
+                  <InputLabel htmlFor="passwordInput">Password</InputLabel>
+                  <OutlinedInput {...field} id="passwordInput" label="Password" type="password" />
                   {errors.password ? <FormHelperText>{errors.password.message}</FormHelperText> : null}
                 </FormControl>
               )}
             />
-            {/* Confirm password input */}
+            {/* Confirm Password input */}
             <Controller
               control={control}
               name="confirmPassword"
               render={({ field }) => (
                 <FormControl error={Boolean(errors.confirmPassword)}>
-                  <InputLabel>Confirm password</InputLabel>
-                  <OutlinedInput {...field} label="Confirm password" type="password" />
+                  <InputLabel htmlFor="confirmPasswordInput">Confirm Password</InputLabel>
+                  <OutlinedInput {...field} id="confirmPasswordInput" label="Confirm Password" type="password" />
                   {errors.confirmPassword ? <FormHelperText>{errors.confirmPassword.message}</FormHelperText> : null}
                 </FormControl>
               )}
@@ -263,12 +263,13 @@ export function SignUpForm(): React.JSX.Element {
               render={({ field }) => (
                 <div>
                   <FormControlLabel
-                    control={<Checkbox {...field} />}
+                    control={<Checkbox {...field} id="termsCheckbox" />}
                     label={
                       <React.Fragment>
                         I have read the <Link>terms and conditions</Link>
                       </React.Fragment>
                     }
+                    htmlFor="termsCheckbox"
                   />
                   {errors.terms ? <FormHelperText error>{errors.terms.message}</FormHelperText> : null}
                 </div>
@@ -287,8 +288,8 @@ export function SignUpForm(): React.JSX.Element {
           <Stack spacing={2}>
             {/* Email input disabled */}
             <FormControl>
-              <InputLabel>Email address</InputLabel>
-              <OutlinedInput value={formData?.email} label="Email address" type="email" disabled />
+              <InputLabel htmlFor="emailInput">Email Address</InputLabel>
+              <OutlinedInput id="emailInput" value={formData?.email} label="Email Address" type="email" disabled />
             </FormControl>
             {/* Token input */}
             <Controller
@@ -296,8 +297,8 @@ export function SignUpForm(): React.JSX.Element {
               name="token"
               render={({ field }) => (
                 <FormControl error={Boolean(tokenErrors.token)}>
-                  <InputLabel>Token</InputLabel>
-                  <OutlinedInput {...field} label="Token" />
+                  <InputLabel htmlFor="tokenInput">Token</InputLabel>
+                  <OutlinedInput {...field} id="tokenInput" label="Token" />
                   {tokenErrors.token ? <FormHelperText>{tokenErrors.token.message}</FormHelperText> : null}
                 </FormControl>
               )}

@@ -39,16 +39,16 @@ export function SideNav(): React.JSX.Element {
     <Box
       sx={{
         // CSS variables for styling
-        '--SideNav-background': 'var(--mui-palette-neutral-950)',
-        '--SideNav-color': 'var(--mui-palette-common-white)',
-        '--NavItem-color': 'var(--mui-palette-neutral-300)',
+        '--SideNav-background': (theme) => theme.palette.neutral[950],
+        '--SideNav-color': (theme) => theme.palette.common.white,
+        '--NavItem-color': (theme) => theme.palette.neutral[300],
         '--NavItem-hover-background': 'rgba(255, 255, 255, 0.04)',
-        '--NavItem-active-background': 'var(--mui-palette-primary-main)',
-        '--NavItem-active-color': 'var(--mui-palette-primary-contrastText)',
-        '--NavItem-disabled-color': 'var(--mui-palette-neutral-500)',
-        '--NavItem-icon-color': 'var(--mui-palette-neutral-400)',
-        '--NavItem-icon-active-color': 'var(--mui-palette-primary-contrastText)',
-        '--NavItem-icon-disabled-color': 'var(--mui-palette-neutral-600)',
+        '--NavItem-active-background': (theme) => theme.palette.primary.main,
+        '--NavItem-active-color': (theme) => theme.palette.primary.contrastText,
+        '--NavItem-disabled-color': (theme) => theme.palette.neutral[500],
+        '--NavItem-icon-color': (theme) => theme.palette.neutral[400],
+        '--NavItem-icon-active-color': (theme) => theme.palette.primary.contrastText,
+        '--NavItem-icon-disabled-color': (theme) => theme.palette.neutral[600],
         bgcolor: 'var(--SideNav-background)',
         color: 'var(--SideNav-color)',
         display: { xs: 'none', lg: 'flex' },
@@ -76,11 +76,11 @@ export function SideNav(): React.JSX.Element {
           </Typography>
         </Box>
       </Stack>
-      <Divider sx={{ borderColor: 'var(--mui-palette-neutral-700)' }} />
+      <Divider sx={{ borderColor: (theme) => theme.palette.neutral[700] }} />
       <Box component="nav" sx={{ flex: '1 1 auto', p: '12px' }}>
         {renderNavItems({ pathname: pathname || '', items: filteredNavItems })}
       </Box>
-      <Divider sx={{ borderColor: 'var(--mui-palette-neutral-700)' }} />
+      <Divider sx={{ borderColor: (theme) => theme.palette.neutral[700] }} />
       <Stack spacing={2} sx={{ p: '12px' }}>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           <Typography>© {new Date().getFullYear()} Matan Atedgi</Typography>

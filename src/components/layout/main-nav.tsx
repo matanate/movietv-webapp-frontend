@@ -32,11 +32,11 @@ export function MainNav(): React.JSX.Element {
       <Box
         component="header"
         sx={{
-          borderBottom: '1px solid var(--mui-palette-divider)',
-          backgroundColor: 'var(--mui-palette-background-paper)',
+          borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
+          backgroundColor: (theme) => theme.palette.background.paper,
           position: 'sticky',
           top: 0,
-          zIndex: 'var(--mui-zIndex-appBar)',
+          zIndex: (theme) => theme.zIndex.appBar,
         }}
       >
         <Stack

@@ -95,7 +95,7 @@ export function ResetPasswordForm(): React.JSX.Element {
     async (values: EmailValues): Promise<void> => {
       const { email: emailValue } = values;
       try {
-        await api.post(`validation/`, { type: 'resetPassword', emailValue });
+        await api.post(`validation/`, { type: 'resetPassword', email: emailValue });
         setEmail(emailValue);
         setStage(2);
         setTimeLeft(180);
@@ -162,8 +162,14 @@ export function ResetPasswordForm(): React.JSX.Element {
               name="email"
               render={({ field }) => (
                 <FormControl error={Boolean(emailErrors.email)}>
-                  <InputLabel>Email address</InputLabel>
-                  <OutlinedInput {...field} label="Email address" type="email" disabled={!user} />
+                  <InputLabel htmlFor="emailInput">Email Address</InputLabel>
+                  <OutlinedInput
+                    {...field}
+                    id="emailInput"
+                    label="Email Address"
+                    type="email"
+                    disabled={user ? true : false}
+                  />
                   {emailErrors.email ? <FormHelperText>{emailErrors.email.message}</FormHelperText> : null}
                 </FormControl>
               )}
@@ -181,8 +187,8 @@ export function ResetPasswordForm(): React.JSX.Element {
           <Stack spacing={2}>
             {/* Email input disabled */}
             <FormControl>
-              <InputLabel>Email address</InputLabel>
-              <OutlinedInput value={email} label="Email address" type="email" disabled />
+              <InputLabel htmlFor="emailInput">Email Address</InputLabel>
+              <OutlinedInput value={email} id="emailInput" label="Email Address" type="email" disabled />
             </FormControl>
             {/* Token input */}
             <Controller
@@ -190,8 +196,8 @@ export function ResetPasswordForm(): React.JSX.Element {
               name="token"
               render={({ field }) => (
                 <FormControl error={Boolean(tokenErrors.token)}>
-                  <InputLabel>Token</InputLabel>
-                  <OutlinedInput {...field} label="Token" />
+                  <InputLabel htmlFor="tokenInput">Token</InputLabel>
+                  <OutlinedInput {...field} id="tokenInput" label="Token" />
                   {tokenErrors.token ? <FormHelperText>{tokenErrors.token.message}</FormHelperText> : null}
                 </FormControl>
               )}
@@ -202,8 +208,8 @@ export function ResetPasswordForm(): React.JSX.Element {
               name="newPassword"
               render={({ field }) => (
                 <FormControl error={Boolean(tokenErrors.newPassword)}>
-                  <InputLabel>Password</InputLabel>
-                  <OutlinedInput {...field} label="newPassword" type="password" />
+                  <InputLabel htmlFor="newPasswordInput">Password</InputLabel>
+                  <OutlinedInput {...field} id="newPasswordInput" label="newPassword" type="password" />
                   {tokenErrors.newPassword ? <FormHelperText>{tokenErrors.newPassword.message}</FormHelperText> : null}
                 </FormControl>
               )}
@@ -214,8 +220,8 @@ export function ResetPasswordForm(): React.JSX.Element {
               name="confirmPassword"
               render={({ field }) => (
                 <FormControl error={Boolean(tokenErrors.confirmPassword)}>
-                  <InputLabel>Confirm password</InputLabel>
-                  <OutlinedInput {...field} label="Confirm password" type="password" />
+                  <InputLabel htmlFor="confirmPasswordInput">Confirm password</InputLabel>
+                  <OutlinedInput {...field} id="confirmPasswordInput" label="Confirm password" type="password" />
                   {tokenErrors.confirmPassword ? (
                     <FormHelperText>{tokenErrors.confirmPassword.message}</FormHelperText>
                   ) : null}

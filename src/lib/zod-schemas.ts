@@ -2,7 +2,7 @@ import { z as zod } from 'zod';
 
 // Sign in form schema
 export const signInSchema = zod.object({
-  email: zod.string().email().min(5, { message: 'Email is required' }),
+  email: zod.string().min(1, { message: 'Email is required' }).email({ message: 'Invalid email' }),
   password: zod.string().min(1, { message: 'Password is required' }),
 });
 
@@ -12,7 +12,7 @@ export const signUpSchema = zod
     username: zod.string().min(1, { message: 'Username is required' }),
     firstName: zod.string().min(1, { message: 'First name is required' }),
     lastName: zod.string().min(1, { message: 'Last name is required' }),
-    email: zod.string().min(1, { message: 'Email is required' }).email({ message: 'Invalid email address' }),
+    email: zod.string().min(1, { message: 'Email is required' }).email({ message: 'Invalid email' }),
     password: zod.string().min(6, { message: 'Password should be at least 6 characters' }),
     confirmPassword: zod.string().min(1, { message: 'Confirm password is required' }),
     terms: zod.boolean().refine((value) => value, 'You must accept the terms and conditions'),

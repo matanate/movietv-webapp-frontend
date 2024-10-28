@@ -48,7 +48,7 @@ export default function Layout({ children }: LayoutProps): React.JSX.Element {
                       />
                       <Box
                         sx={{
-                          bgcolor: 'var(--mui-palette-background-default)',
+                          bgcolor: 'background.default',
                           display: 'flex',
                           flexDirection: 'column',
                           position: 'relative',
@@ -81,6 +81,7 @@ export default function Layout({ children }: LayoutProps): React.JSX.Element {
             </GoogleOAuthProvider>
           </AlertProviderWrapper>
         </LocalizationProvider>
+        <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script>
       </body>
     </html>
   );

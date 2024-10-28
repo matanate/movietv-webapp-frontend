@@ -3,9 +3,7 @@
 import * as React from 'react';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
-import { IconButton, useColorScheme } from '@mui/material';
-import CssBaseline from '@mui/material/CssBaseline';
-import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material/styles';
+import { CssBaseline, IconButton, ThemeProvider as MUIThemeProvider, useColorScheme } from '@mui/material';
 
 import { createTheme } from '@/styles/theme/create-theme';
 
@@ -28,15 +26,7 @@ export const ModeSwitcher = React.forwardRef<HTMLButtonElement>((props, ref) => 
       {...props}
       ref={ref}
       sx={{ ml: 1 }}
-      onClick={
-        mode === 'light'
-          ? () => {
-              setMode('dark');
-            }
-          : () => {
-              setMode('light');
-            }
-      }
+      onClick={mode === 'light' ? () => setMode('dark') : () => setMode('light')}
       color="inherit"
     >
       {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
@@ -46,19 +36,20 @@ export const ModeSwitcher = React.forwardRef<HTMLButtonElement>((props, ref) => 
 ModeSwitcher.displayName = 'ModeSwitcher';
 
 /**
- * ThemeProvider component provides a theme for the application.
+ * CustomThemeProvider component provides a theme for the application.
  *
  * @param  children - The children components.
- * @returns JSX.Element The rendered ThemeProvider component.
+ * @returns JSX.Element The rendered CustomThemeProvider component.
  */
 export function ThemeProvider({ children }: ThemeProviderProps): React.JSX.Element {
   const theme = createTheme();
+
   return (
     <EmotionCache options={{ key: 'mui' }}>
-      <CssVarsProvider theme={theme}>
+      <MUIThemeProvider theme={theme}>
         <CssBaseline />
         {children}
-      </CssVarsProvider>
+      </MUIThemeProvider>
     </EmotionCache>
   );
 }

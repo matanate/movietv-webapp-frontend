@@ -43,17 +43,18 @@ export function MobileNav({ open, onClose }: MobileNavProps): React.JSX.Element 
     <Drawer
       PaperProps={{
         sx: {
-          '--MobileNav-background': 'var(--mui-palette-neutral-950)',
-          '--MobileNav-color': 'var(--mui-palette-common-white)',
-          '--NavItem-color': 'var(--mui-palette-neutral-300)',
+          '--MobileNav-background': (theme) => theme.palette.neutral[950],
+          '--MobileNav-color': (theme) => theme.palette.common.white,
+          '--NavItem-color': (theme) => theme.palette.neutral[300],
           '--NavItem-hover-background': 'rgba(255, 255, 255, 0.04)',
-          '--NavItem-active-background': 'var(--mui-palette-primary-main)',
-          '--NavItem-active-color': 'var(--mui-palette-primary-contrastText)',
-          '--NavItem-disabled-color': 'var(--mui-palette-neutral-500)',
-          '--NavItem-icon-color': 'var(--mui-palette-neutral-400)',
-          '--NavItem-icon-active-color': 'var(--mui-palette-primary-contrastText)',
-          '--NavItem-icon-disabled-color': 'var(--mui-palette-neutral-600)',
+          '--NavItem-active-background': (theme) => theme.palette.primary.main,
+          '--NavItem-active-color': (theme) => theme.palette.primary.contrastText,
+          '--NavItem-disabled-color': (theme) => theme.palette.neutral[500],
+          '--NavItem-icon-color': (theme) => theme.palette.neutral[400],
+          '--NavItem-icon-active-color': (theme) => theme.palette.primary.contrastText,
+          '--NavItem-icon-disabled-color': (theme) => theme.palette.neutral[600],
           bgcolor: 'var(--MobileNav-background)',
+          backgroundImage: 'none',
           color: 'var(--MobileNav-color)',
           display: 'flex',
           flexDirection: 'column',
@@ -80,12 +81,12 @@ export function MobileNav({ open, onClose }: MobileNavProps): React.JSX.Element 
           </Typography>
         </Box>
       </Stack>
-      <Divider sx={{ borderColor: 'var(--mui-palette-neutral-700)' }} />
+      <Divider sx={{ borderColor: theme=>theme.palette.neutral[700] }} />
       <Box component="nav" sx={{ flex: '1 1 auto', p: '12px' }}>
         {/* Render navigation items */}
         {renderNavItems({ pathname: pathname || '', items: filteredNavItems })}
       </Box>
-      <Divider sx={{ borderColor: 'var(--mui-palette-neutral-700)' }} />
+      <Divider sx={{ borderColor: theme=>theme.palette.neutral[700] }} />
       <Stack spacing={2} sx={{ p: '12px' }}>
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
           {/* Footer */}

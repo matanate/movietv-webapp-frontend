@@ -10,9 +10,9 @@ import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import Divider from '@mui/material/Divider';
 import FormControl from '@mui/material/FormControl';
+import Grid from '@mui/material/Grid2';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import Grid from '@mui/material/Unstable_Grid2';
 import { AxiosError } from 'axios';
 import { Controller, useForm } from 'react-hook-form';
 import { z as zod } from 'zod';
@@ -110,7 +110,7 @@ export function AccountDetailsForm(): React.JSX.Element {
         <CardContent>
           <Grid container spacing={3}>
             {/* First name input */}
-            <Grid md={6} xs={12}>
+            <Grid size={{ md: 6, xs: 12 }}>
               {/* First name input */}
               <Controller
                 control={control}
@@ -118,9 +118,9 @@ export function AccountDetailsForm(): React.JSX.Element {
                 render={({ field }) => (
                   <FormControl error={Boolean(errors.firstName)}>
                     {/* Input label */}
-                    <InputLabel>First Name</InputLabel>
+                    <InputLabel htmlFor="InputFirstName">First Name</InputLabel>
                     {/* Input */}
-                    <OutlinedInput {...field} label="First Name" />
+                    <OutlinedInput {...field} id="InputFirstName" label="First Name" />
                     {/* Error message */}
                     {errors.firstName ? <FormHelperText>{errors.firstName.message}</FormHelperText> : null}
                   </FormControl>
@@ -128,29 +128,29 @@ export function AccountDetailsForm(): React.JSX.Element {
               />
             </Grid>
             {/* Last name input */}
-            <Grid md={6} xs={12}>
+            <Grid size={{ md: 6, xs: 12 }}>
               {/* Last name input */}
               <Controller
                 control={control}
                 name="lastName"
                 render={({ field }) => (
                   <FormControl error={Boolean(errors.lastName)}>
-                    <InputLabel>Last Name</InputLabel>
-                    <OutlinedInput {...field} label="Last Name" />
+                    <InputLabel htmlFor="InputLastName">Last Name</InputLabel>
+                    <OutlinedInput {...field} id="InputLastName" label="Last Name" />
                     {errors.lastName ? <FormHelperText>{errors.lastName.message}</FormHelperText> : null}
                   </FormControl>
                 )}
               />
             </Grid>
-            <Grid md={6} xs={12}>
+            <Grid size={{ md: 6, xs: 12 }}>
               {/* Username input */}
               <Controller
                 control={control}
                 name="username"
                 render={({ field }) => (
                   <FormControl error={Boolean(errors.username)}>
-                    <InputLabel>Username</InputLabel>
-                    <OutlinedInput {...field} label="Username address" />
+                    <InputLabel htmlFor="InputUsername">Username</InputLabel>
+                    <OutlinedInput {...field} id="InputUsername" label="Username address" />
                     {errors.username ? <FormHelperText>{errors.username.message}</FormHelperText> : null}
                   </FormControl>
                 )}

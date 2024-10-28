@@ -84,8 +84,8 @@ export function SignInForm(): React.JSX.Element {
             name="email"
             render={({ field }) => (
               <FormControl error={Boolean(errors.email)}>
-                <InputLabel>Email</InputLabel>
-                <OutlinedInput {...field} label="Email address" type="string" />
+                <InputLabel htmlFor="emailInput">Email</InputLabel>
+                <OutlinedInput {...field} id="emailInput" label="Email address" type="string" />
                 {errors.email ? <FormHelperText>{errors.email.message}</FormHelperText> : null}
               </FormControl>
             )}
@@ -96,8 +96,8 @@ export function SignInForm(): React.JSX.Element {
             name="password"
             render={({ field }) => (
               <FormControl error={Boolean(errors.password)}>
-                <InputLabel>Password</InputLabel>
-                <OutlinedInput {...field} label="Password" type="password" />
+                <InputLabel htmlFor="passwordInput">Password</InputLabel>
+                <OutlinedInput {...field} id="passwordInput" label="Password" type="password" />
                 {errors.password ? <FormHelperText>{errors.password.message}</FormHelperText> : null}
               </FormControl>
             )}
@@ -109,7 +109,7 @@ export function SignInForm(): React.JSX.Element {
             </Link>
           </div>
           {/* Error message */}
-          {errors.root ? <Alert color="error">{errors.root.message}</Alert> : null}
+          {errors.root && errors.root.message ? <Alert color="error">{errors.root.message}</Alert> : null}
           {/* Submit button */}
           <Button disabled={loading} type="submit" variant="contained">
             Sign in
