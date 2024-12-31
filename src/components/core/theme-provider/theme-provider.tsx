@@ -26,7 +26,15 @@ export const ModeSwitcher = React.forwardRef<HTMLButtonElement>((props, ref) => 
       {...props}
       ref={ref}
       sx={{ ml: 1 }}
-      onClick={mode === 'light' ? () => setMode('dark') : () => setMode('light')}
+      onClick={
+        mode === 'light'
+          ? () => {
+              setMode('dark');
+            }
+          : () => {
+              setMode('light');
+            }
+      }
       color="inherit"
     >
       {mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}

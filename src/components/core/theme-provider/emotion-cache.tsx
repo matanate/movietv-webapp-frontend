@@ -61,10 +61,10 @@ export default function NextAppDirEmotionCacheProvider(props: NextAppDirEmotionC
 
       if (typeof style !== 'boolean') {
         if (isGlobal) {
-          globals.push({ name, style: style || '' });
+          globals.push({ name, style: style === undefined ? '' : style.toString() });
         } else {
-          styles += style;
-          dataEmotionAttribute += ` ${name}`;
+          styles += style === undefined ? '' : style.toString();
+          dataEmotionAttribute += ` ${name.toString()}`;
         }
       }
     });

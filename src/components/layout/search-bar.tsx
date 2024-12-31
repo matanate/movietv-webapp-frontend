@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { IconButton, Tooltip } from '@mui/material';
 import { MagnifyingGlass as MagnifyingGlassIcon } from '@phosphor-icons/react/dist/ssr/MagnifyingGlass';
 
@@ -13,7 +12,6 @@ import SearchInput from '@/components/layout/search-input';
 function SearchBar(): React.JSX.Element {
   // State for controlling the search input visibility
   const [openSearch, setOpenSearch] = useState(false);
-  const router = useRouter();
 
   // Function to handle search button click
   const handleSearchClick = (value: string | null = null): void => {
@@ -21,7 +19,7 @@ function SearchBar(): React.JSX.Element {
       setOpenSearch(true);
     } else {
       if (value && value !== '') {
-        router.push(`/search/?q=${value}`);
+        window.location.href = `/search/?q=${value}`;
       }
       setOpenSearch(false);
     }

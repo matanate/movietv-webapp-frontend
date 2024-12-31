@@ -168,7 +168,7 @@ export function ResetPasswordForm(): React.JSX.Element {
                     id="emailInput"
                     label="Email Address"
                     type="email"
-                    disabled={user ? true : false}
+                    disabled={Boolean(user)}
                   />
                   {emailErrors.email ? <FormHelperText>{emailErrors.email.message}</FormHelperText> : null}
                 </FormControl>

@@ -81,7 +81,7 @@ export default function Layout({ children }: LayoutProps): React.JSX.Element {
             </GoogleOAuthProvider>
           </AlertProviderWrapper>
         </LocalizationProvider>
-        <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script>
+        <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer />
       </body>
     </html>
   );

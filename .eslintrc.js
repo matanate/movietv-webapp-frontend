@@ -4,6 +4,7 @@ const project = resolve(__dirname, 'tsconfig.json');
 
 module.exports = {
   root: true,
+  ignorePatterns: ['**/*.test.*', '**/*.spec.*'], // Ignore test files
   extends: [
     require.resolve('@vercel/style-guide/eslint/node'),
     require.resolve('@vercel/style-guide/eslint/typescript'),
