@@ -8,6 +8,8 @@ import TitleReviews from '@/components/title-reviews';
 
 export const metadata = { title: config.site.name } satisfies Metadata;
 
+export const runtime = 'edge';
+
 export default function Page({ params }: { params: { id: string } }): React.JSX.Element {
   const id = params?.id;
   return (

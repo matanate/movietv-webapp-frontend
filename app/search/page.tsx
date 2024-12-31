@@ -7,6 +7,8 @@ import TitlesGrid from '@/components/titles-grid/titles-grid';
 
 export const metadata = { title: `Search | ${config.site.name}` } satisfies Metadata;
 
+export const runtime = 'edge';
+
 type SearchParams = Record<string, string>;
 
 export default function Page({ searchParams }: { searchParams: SearchParams }): React.JSX.Element {
