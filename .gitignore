@@ -12,6 +12,7 @@
 /build
 out
 .next
+.vercel
 
 # misc
 .DS_Store
