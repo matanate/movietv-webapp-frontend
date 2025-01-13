@@ -474,10 +474,10 @@ export const useRecords = <T extends RecordType>(
   useEffect(() => {
     if (!_.isEqual(initialFilters, {})) {
       setFilters(recordType, recordVariant, initialFilters);
-    }
-    // Check if initialFilters has a search value
-    if (!(initialFilters as TitleFilters).search && recordsState.orderBy === 'bestMatch') {
-      setOrderBy(recordType, recordVariant, 'rating');
+      // Check if initialFilters has a search value
+      if (!(initialFilters as TitleFilters).search && recordsState.orderBy === 'bestMatch') {
+        setOrderBy(recordType, recordVariant, 'rating');
+      }
     }
   }, []);
 

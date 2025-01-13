@@ -2,7 +2,7 @@ import * as React from 'react';
 import { KeyboardDoubleArrowDown, KeyboardDoubleArrowUp, Sort } from '@mui/icons-material';
 import { Button, Menu, MenuItem } from '@mui/material';
 
-import type { RecordType, RecordVariant } from '@/contexts/records-context';
+import { useRecords, type RecordType, type RecordVariant, type TitleFilters } from '@/contexts/records-context';
 
 interface SortMenuProps {
   orderBy: string | null; // The current sorting order
@@ -34,6 +34,7 @@ function SortMenu({
   recordVariant,
 }: SortMenuProps): React.JSX.Element {
   const [anchorElSort, setAnchorElSort] = React.useState<null | HTMLElement>(null);
+  const { filters } = useRecords(recordType, recordVariant);
   const openSort = Boolean(anchorElSort);
 
   /**
@@ -90,10 +91,10 @@ function SortMenu({
         }}
       >
         <div>
-          {recordVariant === 'search' && (
+          {recordVariant === 'search' && (filters as TitleFilters).search && (
             <MenuItem
               onClick={() => {
-                handleSortSelect('rating');
+                handleSortSelect('bestMatch');
               }}
             >
               {orderBy === 'bestMatch' && (!isAscending ? <KeyboardDoubleArrowUp /> : <KeyboardDoubleArrowDown />)}
