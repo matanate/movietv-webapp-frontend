@@ -138,3 +138,9 @@ body {
 .card:nth-child(even):hover .front {
   transform: rotateY(-180deg);
 }
+
+.asw-menu-btn {
+  height: 42px !important;
+  width: 42px !important;
+  opacity: 0.7 !important;
+}
